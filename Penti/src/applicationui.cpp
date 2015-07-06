@@ -44,6 +44,7 @@ ApplicationUI::ApplicationUI() :
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
+    qml->setContextProperty("_app",this);
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
 
@@ -60,4 +61,15 @@ void ApplicationUI::onSystemLanguageChanged()
     if (m_pTranslator->load(file_name, "app/native/qm")) {
         QCoreApplication::instance()->installTranslator(m_pTranslator);
     }
+}
+
+void ApplicationUI::setValue(QString field, QString input)
+{
+    AppSettings::saveValueFor(field, input);
+}
+
+QString ApplicationUI::getValue(QString input, QString def)
+{
+    QString result = AppSettings::getValueFor(input, def);
+    return result;
 }

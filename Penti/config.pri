@@ -37,7 +37,11 @@ simulator {
 config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/about.qml) \
+        $$quote($$BASEDIR/assets/blank.css) \
+        $$quote($$BASEDIR/assets/dark.css) \
         $$quote($$BASEDIR/assets/icon/ic_browser.png) \
+        $$quote($$BASEDIR/assets/icon/ic_disable.png) \
+        $$quote($$BASEDIR/assets/icon/ic_enable.png) \
         $$quote($$BASEDIR/assets/icon/ic_info.png) \
         $$quote($$BASEDIR/assets/icon/ic_open.png) \
         $$quote($$BASEDIR/assets/icon/ic_share.png) \
@@ -47,11 +51,13 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
+        $$quote($$BASEDIR/src/AppSettings.cpp) \
         $$quote($$BASEDIR/src/WebImageView.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/main.cpp)
 
     HEADERS += \
+        $$quote($$BASEDIR/src/AppSettings.hpp) \
         $$quote($$BASEDIR/src/WebImageView.h) \
         $$quote($$BASEDIR/src/applicationui.hpp)
 }

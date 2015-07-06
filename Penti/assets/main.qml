@@ -26,6 +26,15 @@ NavigationPane {
                 nav.push(page)
             }
         }
+        actions: [
+            ActionItem {
+                title: qsTr("Review")
+                imageSource: "asset:///icon/ic_open.png"
+                onTriggered: {
+                    Qt.openUrlExternally("http://appworld.blackberry.com/webstore/content/59963510")
+                }
+            }
+        ]
     }
     property string state_loading: qsTr("Loading RSS")
     property string state_done: qsTr("RSS Loaded")
@@ -53,6 +62,14 @@ NavigationPane {
                     nav.push(page)
                 }
                 scrollIndicatorMode: ScrollIndicatorMode.ProportionalBar
+                attachedObjects: [
+                    LayoutUpdateHandler {
+                        onLayoutFrameChanged: {
+                            tugualist.wwidth = layoutFrame.width
+                        }
+                    }
+                ]
+                property int wwidth: 50
                 listItemComponents: [
                     ListItemComponent {
                         type: ""
@@ -61,7 +78,7 @@ NavigationPane {
                                 TapHandler {
                                     onTapped: {
                                         itemroot.ListItem.view.requestOpenViewer(ListItemData.description)
-                                        
+
                                     }
                                 }
                             ]
@@ -76,33 +93,37 @@ NavigationPane {
                             property string title_intro: ListItemData.title.substring(splitindex)
                             property string readurl: ListItemData.description
                             Header {
-                                title: ListItemData.title.substring(0, ListItemData.title.indexOf(String.fromCharCode(12305)) + 1).trim()
+                                subtitle: ListItemData.title.substring(0, ListItemData.title.indexOf(String.fromCharCode(12305)) + 1).trim()
                             }
                             Container {
-                                layout: StackLayout {
-                                    orientation: LayoutOrientation.LeftToRight
+                                layout: DockLayout {
 
                                 }
-                                topPadding: 10.0
-                                bottomPadding: 10.0
                                 WebImageView {
                                     url: ListItemData.imgurl
-                                    layoutProperties: StackLayoutProperties {
-                                        spaceQuota: 0.38
-                                    }
-                                    scalingMethod: ScalingMethod.AspectFit
+                                    scalingMethod: ScalingMethod.AspectFill
                                     loadEffect: ImageViewLoadEffect.FadeZoom
+                                    preferredWidth: itemroot.ListItem.view.wwidth
+                                    preferredHeight: preferredWidth /2
+                                    id: iconOnLeft
+                                    horizontalAlignment: HorizontalAlignment.Fill
                                 }
-                                Label {
-                                    multiline: true
-                                    text: ListItemData.title.substring(ListItemData.title.indexOf(String.fromCharCode(12305)) + 1)
-                                    layoutProperties: StackLayoutProperties {
-                                        spaceQuota: 1.0
-
+                                Container {
+                                    background: Color.create("#acffffff")
+                                    horizontalAlignment: HorizontalAlignment.Fill
+                                    verticalAlignment: VerticalAlignment.Bottom
+                                    topPadding: 20.0
+                                    leftPadding: 20.0
+                                    bottomPadding: 20.0
+                                    rightPadding: 20.0
+                                    Label {
+                                        multiline: true
+                                        text: ListItemData.title.substring(ListItemData.title.indexOf(String.fromCharCode(12305)) + 1)
+                                        textStyle.color: Color.Black
+                                        textStyle.textAlign: TextAlign.Left
                                     }
-                                    verticalAlignment: VerticalAlignment.Center
-                                    horizontalAlignment: HorizontalAlignment.Left
                                 }
+
                             }
                         }
                     }
