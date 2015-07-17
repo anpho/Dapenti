@@ -18,6 +18,20 @@ import bb.cascades 1.2
 import bb.data 1.0
 import lib.anpho 1.0
 NavigationPane {
+    property int columns: parseInt(_app.getValue('col', '1'))
+    function reloadcolumns() {
+        columns = parseInt(_app.getv('col', '1'))
+    }
+    onPopTransitionEnded: {
+        if (nav.top.setActive) {
+            nav.top.setActive();
+        }
+    }
+    onPushTransitionEnded: {
+        if (nav.top.setActive) {
+            nav.top.setActive();
+        }
+    }
     id: nav
     Menu.definition: MenuDefinition {
         helpAction: HelpActionItem {
@@ -33,6 +47,18 @@ NavigationPane {
                 onTriggered: {
                     Qt.openUrlExternally("http://appworld.blackberry.com/webstore/content/59963510")
                 }
+            },
+            ActionItem {
+                title: qsTr("Toggle Layout")
+                imageSource: "asset:///icon/ic_view_grid.png"
+                onTriggered: {
+                    if (nav.columns == 1) {
+                        nav.columns = 2;
+                    } else {
+                        nav.columns = 1;
+                    }
+                    _app.setValue("col", nav.columns)
+                }
             }
         ]
     }
@@ -40,6 +66,10 @@ NavigationPane {
     property string state_done: qsTr("RSS Loaded")
     property string state_error: qsTr("RSS load failed")
     Page {
+        function setActive() {
+            tugualist.scrollRole = ScrollRole.Main;
+            tugualist.requestFocus()
+        }
         titleBar: TitleBar {
             title: qsTr("Penti News")
             scrollBehavior: TitleBarScrollBehavior.NonSticky
@@ -104,7 +134,7 @@ NavigationPane {
                                     scalingMethod: ScalingMethod.AspectFill
                                     loadEffect: ImageViewLoadEffect.FadeZoom
                                     preferredWidth: itemroot.ListItem.view.wwidth
-                                    preferredHeight: preferredWidth /2
+                                    preferredHeight: preferredWidth * 0.618
                                     id: iconOnLeft
                                     horizontalAlignment: HorizontalAlignment.Fill
                                 }
@@ -117,7 +147,7 @@ NavigationPane {
                                     bottomPadding: 20.0
                                     rightPadding: 20.0
                                     Label {
-                                        multiline: true
+                                        multiline: false
                                         text: ListItemData.title.substring(ListItemData.title.indexOf(String.fromCharCode(12305)) + 1)
                                         textStyle.color: Color.Black
                                         textStyle.textAlign: TextAlign.Left
@@ -128,6 +158,12 @@ NavigationPane {
                         }
                     }
                 ]
+                layout: GridListLayout {
+                    columnCount: nav.columns
+                    cellAspectRatio: 1.61
+
+                }
+                bufferedScrollingEnabled: true
             }
             Container {
                 id: stateContainer

@@ -23,6 +23,7 @@ public:
 
     Q_INVOKABLE void clearCache();
     Q_INVOKABLE QString getCachedPath();
+    Q_INVOKABLE void resetControl();
 
 public Q_SLOTS:
 	void setUrl(QUrl url);
@@ -30,7 +31,6 @@ public Q_SLOTS:
 private Q_SLOTS:
 	void imageLoaded();
 	void dowloadProgressed(qint64,qint64);
-	void resetControl();
 
 private:
 	static QNetworkAccessManager * mNetManager;
@@ -46,6 +46,7 @@ signals:
     void urlChanged();
     void loadingChanged();
     void loadComplete();
+    void cancel();
 };
 
 #endif /* WEBIMAGEVIEW_H_ */

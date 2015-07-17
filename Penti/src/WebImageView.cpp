@@ -89,7 +89,7 @@ void WebImageView::setUrl(QUrl url)
     QObject::connect(reply, SIGNAL(finished()), this, SLOT(imageLoaded()));
     QObject::connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this,
             SLOT(dowloadProgressed(qint64,qint64)));
-
+    QObject::connect(this, SIGNAL(cancel()), reply, SLOT(deleteLater()));
     emit urlChanged();
 }
 /*
@@ -178,8 +178,11 @@ QString WebImageView::getCachedPath()
         qDebug()<<"imageData is empty.";
         return "";
     } else {
-        QString fileName = md5(mUrl.toString());
-        QString filepath = QDir::homePath() + "/images/" + fileName + ".jpg"; //in my app this can only be jpg. you'd change it from mUrl.
+        QString str_url = mUrl.toString();
+        QString fileName = md5(str_url);
+        int extdot = str_url.lastIndexOf(".");
+        QString ext = str_url.mid(extdot, str_url.length());
+        QString filepath = QDir::homePath() + "/images/" + fileName + ext; //in my app this can only be jpg. you'd change it from mUrl.
         QFile imageFile(filepath);
         if (imageFile.open(QIODevice::WriteOnly)) {
             imageFile.write(imageData);
@@ -200,6 +203,7 @@ void WebImageView::dowloadProgressed(qint64 bytes, qint64 total)
 
 void WebImageView::resetControl()
 {
+    emit cancel();
 	// reset everything to default.
     resetImage();
     resetImageSource();

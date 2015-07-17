@@ -35,27 +35,32 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="31"/>
+        <location filename="../assets/main.qml" line="45"/>
         <source>Review</source>
         <translation>评论</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="39"/>
+        <location filename="../assets/main.qml" line="52"/>
+        <source>Toggle Layout</source>
+        <translation>切换布局</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="65"/>
         <source>Loading RSS</source>
         <translation>正在加载</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="40"/>
+        <location filename="../assets/main.qml" line="66"/>
         <source>RSS Loaded</source>
         <translation>加载完成</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="41"/>
+        <location filename="../assets/main.qml" line="67"/>
         <source>RSS load failed</source>
         <translation>内容加载失败</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="44"/>
+        <location filename="../assets/main.qml" line="74"/>
         <source>Penti News</source>
         <translation>喷嚏图卦</translation>
     </message>
@@ -63,14 +68,29 @@
 <context>
     <name>webviewer</name>
     <message>
-        <location filename="../assets/webviewer.qml" line="12"/>
+        <location filename="../assets/webviewer.qml" line="20"/>
         <source>Open in browser</source>
         <translation>在外部浏览器中打开</translation>
     </message>
     <message>
-        <location filename="../assets/webviewer.qml" line="20"/>
+        <location filename="../assets/webviewer.qml" line="28"/>
         <source>Dark mode</source>
         <translation>夜间模式</translation>
+    </message>
+    <message>
+        <location filename="../assets/webviewer.qml" line="44"/>
+        <source>Fontsize-</source>
+        <translation>字体减小</translation>
+    </message>
+    <message>
+        <location filename="../assets/webviewer.qml" line="55"/>
+        <source>Fontsize+</source>
+        <translation>字体加大</translation>
+    </message>
+    <message>
+        <location filename="../assets/webviewer.qml" line="66"/>
+        <source>Share</source>
+        <translation>共享</translation>
     </message>
 </context>
 </TS>

@@ -20,9 +20,9 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
-
 using namespace bb::cascades;
-
+#include <bb/cascades/InvokeQuery>
+#include <bb/cascades/Invocation>
 ApplicationUI::ApplicationUI() :
         QObject()
 {
@@ -72,4 +72,26 @@ QString ApplicationUI::getValue(QString input, QString def)
 {
     QString result = AppSettings::getValueFor(input, def);
     return result;
+}
+
+
+void ApplicationUI::shareURL(QString path)
+{
+    InvokeQuery *query = InvokeQuery::create().uri(path);
+    Invocation *invocation = Invocation::create(query);
+    query->setParent(invocation); // destroy query with invocation
+    invocation->setParent(this); // app can be destroyed before onFinished() is called
+    connect(invocation, SIGNAL(armed()), this, SLOT(onArmed()));
+    connect(invocation, SIGNAL(finished()), this, SLOT(onFinished()));
+}
+
+void ApplicationUI::onArmed()
+{
+    Invocation *invocation = qobject_cast<Invocation *>(sender());
+    invocation->trigger("bb.action.SHARE");
+}
+void ApplicationUI::onFinished()
+{
+    Invocation *invocation = qobject_cast<Invocation *>(sender());
+    invocation->deleteLater();
 }

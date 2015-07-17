@@ -42,6 +42,10 @@
         <source>Review</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toggle Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>webviewer</name>
@@ -51,6 +55,18 @@
     </message>
     <message>
         <source>Dark mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fontsize-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fontsize+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

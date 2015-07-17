@@ -41,12 +41,15 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI()
     {
-    }
+    };
+    Q_INVOKABLE void shareURL(QString path);
 public slots:
     Q_INVOKABLE QString getValue(QString input, QString def);
     Q_INVOKABLE void setValue(QString field, QString value);
 private slots:
     void onSystemLanguageChanged();
+    void onArmed();
+    void onFinished();
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
