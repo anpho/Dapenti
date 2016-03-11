@@ -42,12 +42,17 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/icon/ic_browser.png) \
         $$quote($$BASEDIR/assets/icon/ic_decrease.png) \
         $$quote($$BASEDIR/assets/icon/ic_disable.png) \
+        $$quote($$BASEDIR/assets/icon/ic_doctype_generic.png) \
         $$quote($$BASEDIR/assets/icon/ic_enable.png) \
         $$quote($$BASEDIR/assets/icon/ic_increase.png) \
         $$quote($$BASEDIR/assets/icon/ic_info.png) \
         $$quote($$BASEDIR/assets/icon/ic_open.png) \
         $$quote($$BASEDIR/assets/icon/ic_share.png) \
         $$quote($$BASEDIR/assets/icon/ic_view_grid.png) \
+        $$quote($$BASEDIR/assets/icon/icon_104.png) \
+        $$quote($$BASEDIR/assets/icon/icon_110.png) \
+        $$quote($$BASEDIR/assets/icon/icon_254.png) \
+        $$quote($$BASEDIR/assets/icon/icon_269.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/webviewer.qml)
 }

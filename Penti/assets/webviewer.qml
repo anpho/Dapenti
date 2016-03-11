@@ -1,6 +1,7 @@
 import bb.cascades 1.4
 
 Page {
+    id: pageroot
     property int fontsize: _app.getValue("fontsize", webv.settings.defaultFontSize)
     onFontsizeChanged: {
         _app.setValue("fontsize", fontsize)
@@ -75,6 +76,11 @@ Page {
         verticalAlignment: VerticalAlignment.Fill
         horizontalAlignment: HorizontalAlignment.Fill
         background: ui.palette.background
+        gestureHandlers: DoubleTapHandler {
+            onDoubleTapped: {
+                pageroot.actionBarVisibility = (pageroot.actionBarVisibility == ChromeVisibility.Hidden) ? ChromeVisibility.Overlay : ChromeVisibility.Hidden
+            }
+        }
         ScrollView {
             id: scrollview
             horizontalAlignment: HorizontalAlignment.Fill

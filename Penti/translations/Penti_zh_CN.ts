@@ -68,27 +68,27 @@
 <context>
     <name>webviewer</name>
     <message>
-        <location filename="../assets/webviewer.qml" line="20"/>
+        <location filename="../assets/webviewer.qml" line="21"/>
         <source>Open in browser</source>
         <translation>在外部浏览器中打开</translation>
     </message>
     <message>
-        <location filename="../assets/webviewer.qml" line="28"/>
+        <location filename="../assets/webviewer.qml" line="29"/>
         <source>Dark mode</source>
         <translation>夜间模式</translation>
     </message>
     <message>
-        <location filename="../assets/webviewer.qml" line="44"/>
+        <location filename="../assets/webviewer.qml" line="45"/>
         <source>Fontsize-</source>
         <translation>字体减小</translation>
     </message>
     <message>
-        <location filename="../assets/webviewer.qml" line="55"/>
+        <location filename="../assets/webviewer.qml" line="56"/>
         <source>Fontsize+</source>
         <translation>字体加大</translation>
     </message>
     <message>
-        <location filename="../assets/webviewer.qml" line="66"/>
+        <location filename="../assets/webviewer.qml" line="67"/>
         <source>Share</source>
         <translation>共享</translation>
     </message>
