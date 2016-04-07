@@ -19,6 +19,9 @@
 
 #include <QObject>
 #include "AppSettings.hpp"
+#include <bb/system/InvokeManager>
+#include <bb/cascades/InvokeQuery>
+#include <bb/cascades/Invocation>
 namespace bb
 {
     namespace cascades
@@ -46,6 +49,7 @@ public:
 public slots:
     Q_INVOKABLE QString getValue(QString input, QString def);
     Q_INVOKABLE void setValue(QString field, QString value);
+    Q_INVOKABLE void viewimage(QString path);
 private slots:
     void onSystemLanguageChanged();
     void onArmed();
@@ -53,6 +57,7 @@ private slots:
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
+    bb::system::InvokeManager* m_pInvokeManager;
 };
 
 #endif /* ApplicationUI_HPP_ */

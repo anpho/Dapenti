@@ -2,7 +2,10 @@ import bb.cascades 1.4
 
 Page {
     id: pageroot
+    property NavigationPane nav
+    property string titleString
     property int fontsize: _app.getValue("fontsize", webv.settings.defaultFontSize)
+    property int mode: parseInt(_app.getValue("mode", "0"))
     onFontsizeChanged: {
         _app.setValue("fontsize", fontsize)
     }
@@ -116,6 +119,7 @@ Page {
                 settings.zoomToFitEnabled: true
                 settings.defaultFontSizeFollowsSystemFontSize: true
                 settings.textAutosizingEnabled: false
+                settings.javaScriptEnabled: mode == 0
             }
         }
 

@@ -65,7 +65,7 @@ void WebImageView::setUrl(QUrl url)
      * deal with "asset://" and relative image path
      */
     if (url.scheme() != "http") {
-        resetImage();
+//        resetImage();
         setImageSource(url);
         return;
     }
@@ -74,7 +74,7 @@ void WebImageView::setUrl(QUrl url)
     mLoading = 0;
 
     // Reset the image
-    resetImage();
+//    resetImage();
 
     // Create request
     QNetworkRequest request;
@@ -89,7 +89,7 @@ void WebImageView::setUrl(QUrl url)
     QObject::connect(reply, SIGNAL(finished()), this, SLOT(imageLoaded()));
     QObject::connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this,
             SLOT(dowloadProgressed(qint64,qint64)));
-    QObject::connect(this, SIGNAL(cancel()), reply, SLOT(deleteLater()));
+
     emit urlChanged();
 }
 /*
@@ -119,7 +119,7 @@ void WebImageView::imageLoaded()
     // Get reply
     QNetworkReply * reply = qobject_cast<QNetworkReply*>(sender());
     QVariant fromCache = reply->attribute(QNetworkRequest::SourceIsFromCacheAttribute);
-//    qDebug() << "page from cache?" << fromCache.toBool();
+    qDebug() << "page from cache?" << fromCache.toBool();
     if (reply->error() == QNetworkReply::NoError) {
         if (isARedirectedUrl(reply)) {
             setURLToRedirectedUrl(reply);
@@ -131,6 +131,7 @@ void WebImageView::imageLoaded()
              * extract data from it, I'd like to keep imageData in Memory for future use.
              * this is why I use global variant instead of local one.
              */
+            resetImage();
             setImage(Image(imageData));
         }
     }
@@ -178,11 +179,8 @@ QString WebImageView::getCachedPath()
         qDebug()<<"imageData is empty.";
         return "";
     } else {
-        QString str_url = mUrl.toString();
-        QString fileName = md5(str_url);
-        int extdot = str_url.lastIndexOf(".");
-        QString ext = str_url.mid(extdot, str_url.length());
-        QString filepath = QDir::homePath() + "/images/" + fileName + ext; //in my app this can only be jpg. you'd change it from mUrl.
+        QString fileName = md5(mUrl.toString());
+        QString filepath = QDir::homePath() + "/images/" + fileName + ".jpg"; //in my app this can only be jpg. you'd change it from mUrl.
         QFile imageFile(filepath);
         if (imageFile.open(QIODevice::WriteOnly)) {
             imageFile.write(imageData);
@@ -203,7 +201,6 @@ void WebImageView::dowloadProgressed(qint64 bytes, qint64 total)
 
 void WebImageView::resetControl()
 {
-    emit cancel();
 	// reset everything to default.
     resetImage();
     resetImageSource();

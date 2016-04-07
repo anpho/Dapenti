@@ -23,16 +23,22 @@
 
 #include <Qt/qdeclarativedebug.h>
 #include "WebImageView.h"
-
+#include <unistd.h>
 using namespace bb::cascades;
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
+    QSettings settings;
+    if (!settings.value("use_dark_theme").isNull()) {
+        qputenv("CASCADES_THEME",
+                (settings.value("use_dark_theme").toString()
+                        /*+ "?primaryColor=0x6A6D90&amp;primaryBase=0xB8BECA"*/).toUtf8());
+    }
+
     Application app(argc, argv);
 
     // Register custom UI components.
     qmlRegisterType<WebImageView>("lib.anpho", 1, 0, "WebImageView");
-
     // Create the Application UI object, this is where the main.qml file
     // is loaded and the application scene is set.
     ApplicationUI appui;

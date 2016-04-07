@@ -40,6 +40,13 @@ NavigationPane {
                 nav.push(page)
             }
         }
+        settingsAction: SettingsActionItem {
+            onTriggered: {
+                var page = Qt.createComponent("Settings.qml").createObject(nav);
+                page.nav = nav;
+                nav.push(page)
+            }
+        }
         actions: [
             ActionItem {
                 title: qsTr("Review")
@@ -86,8 +93,16 @@ NavigationPane {
                 dataModel: ArrayDataModel {
                     id: adm
                 }
-                function requestOpenViewer(uri) {
-                    var page = Qt.createComponent("webviewer.qml").createObject(nav);
+                function requestOpenViewer(uri, titlestr) {
+                    var mode = _app.getValue("mode", "0");
+                    var page;
+                    if (mode == "2") {
+                        page = Qt.createComponent("DailyView.qml").createObject(nav);
+                    } else {
+                        page = Qt.createComponent("webviewer.qml").createObject(nav);
+                    }
+                    page.nav = nav;
+                    page.titleString = titlestr;
                     page.uri = uri;
                     nav.push(page)
                 }
@@ -107,7 +122,7 @@ NavigationPane {
                             gestureHandlers: [
                                 TapHandler {
                                     onTapped: {
-                                        itemroot.ListItem.view.requestOpenViewer(ListItemData.description)
+                                        itemroot.ListItem.view.requestOpenViewer(ListItemData.description, itemroot.title_intro)
 
                                     }
                                 }
@@ -182,6 +197,16 @@ NavigationPane {
                             act.running = false;
                         }
                     }
+                    multiline: true
+                    horizontalAlignment: HorizontalAlignment.Center
+                }
+                Button {
+                    text: qsTr("Reload")
+                    onClicked: {
+                        ds.abort()
+                        ds.load()
+                    }
+                    horizontalAlignment: HorizontalAlignment.Center
                 }
             }
         }

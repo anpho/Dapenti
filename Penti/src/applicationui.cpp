@@ -21,6 +21,7 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
 using namespace bb::cascades;
+using namespace bb::system;
 #include <bb/cascades/InvokeQuery>
 #include <bb/cascades/Invocation>
 ApplicationUI::ApplicationUI() :
@@ -29,6 +30,7 @@ ApplicationUI::ApplicationUI() :
     // prepare the localization
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
+    m_pInvokeManager = new InvokeManager(this);
 
     bool res = QObject::connect(m_pLocaleHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
     // This is only available in Debug builds
@@ -84,7 +86,18 @@ void ApplicationUI::shareURL(QString path)
     connect(invocation, SIGNAL(armed()), this, SLOT(onArmed()));
     connect(invocation, SIGNAL(finished()), this, SLOT(onFinished()));
 }
-
+void ApplicationUI::viewimage(QString path)
+{
+    // invoke the system image viewer
+    InvokeRequest request;
+    // Set the URI
+    request.setUri(path);
+    request.setTarget("sys.pictures.card.previewer");
+    request.setAction("bb.action.VIEW");
+    // Send the invocation request
+    InvokeTargetReply *cardreply = m_pInvokeManager->invoke(request);
+    Q_UNUSED(cardreply);
+}
 void ApplicationUI::onArmed()
 {
     Invocation *invocation = qobject_cast<Invocation *>(sender());

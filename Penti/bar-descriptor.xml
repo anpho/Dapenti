@@ -50,6 +50,7 @@
     <name>
        Penti
        <text xml:lang="zh-CN">&#x55b7;&#x568f;&#x56fe;&#x5366;</text>
+       <text xml:lang="zh-TW">&#x5674;&#x568f;&#x5716;&#x5366;</text>
     </name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
@@ -59,8 +60,8 @@
 
     <!-- Fourth digit segment of the package version. First three segments are taken from the
          <versionNumber> element.  Must be an integer from 0 to 2^16-1 -->
-    <buildId>5</buildId>
-    <packageLocale>zh-CN</packageLocale>
+    <buildId>6</buildId>
+    <packageLocale>zh-CN,zh-TW</packageLocale>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
     <!-- <versionLabel></versionLabel> -->
@@ -75,6 +76,7 @@
     <description>
        www.dapenti.com RSS client
        <text xml:lang="zh-CN">&#x6bcf;&#x65e5;&#x55b7;&#x568f;&#x65b0;&#x95fb;</text>
+       <text xml:lang="zh-TW">&#x57fa;&#x65bc;&#x5674;&#x568f;&#x5716;&#x5366;RSS&#x6e90;&#x7684;&#x672c;&#x5730;&#x5ba2;&#x6236;&#x7aef;</text>
     </description>
     <authorId>gYAAgMy-I-SFJtVvioZxVXYQjhA</authorId>
     <author>anpho</author>
@@ -102,7 +104,8 @@
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
-    <permission>access_shared</permission>
+    <permission>access_internet</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
+    <env var="CASCADES_THEME" value="bright"/>
 
 </qnx>

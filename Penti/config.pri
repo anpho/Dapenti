@@ -36,6 +36,9 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/Common.qml) \
+        $$quote($$BASEDIR/assets/DailyView.qml) \
+        $$quote($$BASEDIR/assets/Settings.qml) \
         $$quote($$BASEDIR/assets/about.qml) \
         $$quote($$BASEDIR/assets/blank.css) \
         $$quote($$BASEDIR/assets/dark.css) \
@@ -97,4 +100,5 @@ lupdate_inclusion {
 }
 
 TRANSLATIONS = $$quote($${TARGET}_zh_CN.ts) \
+    $$quote($${TARGET}_zh_TW.ts) \
     $$quote($${TARGET}.ts)

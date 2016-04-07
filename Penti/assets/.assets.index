@@ -1,7 +1,9 @@
 1
-19
+22
 about.qml
 blank.css
+Common.qml
+DailyView.qml
 dark.css
 icon/icon_104.png
 icon/icon_110.png
@@ -18,4 +20,5 @@ icon/ic_open.png
 icon/ic_share.png
 icon/ic_view_grid.png
 main.qml
+Settings.qml
 webviewer.qml
